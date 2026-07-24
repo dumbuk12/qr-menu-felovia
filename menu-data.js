@@ -1,4 +1,4 @@
-// Felovia Gurme — menü verisi. Menüyü değiştirmek için BU dosyayı düzenleyin.
+// Felovia Gurme — menü verisi.
 
 export const menu = {
   "restaurant": "Felovia Gurme",
