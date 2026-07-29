@@ -7,23 +7,25 @@ export const menu = {
   "currency": "₺",
   "categories": [
     {
-      "name": "Favoriler",
-      "note": "Şefin önerdiği sandviçler",
+      "name": "Şefin Önerdiği Sandviçler",
       "items": [
         {
           "name": "Feloviç Kaburga Füme",
           "price": 660,
-          "desc": "Dana kaburga füme, mozzarella peyniri, roka, domates, zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos"
+          "desc": "Dana kaburga füme (80g), mozzarella peyniri (120g), roka (50g), domates (130g), zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g)",
+          "image": "/images/felovic-kaburga-fume.jpg"
         },
         {
-          "name": "Tiftiko Mozzarella",
-          "price": 990,
-          "desc": "Tiftik et (120gr), mozzarella peyniri, roka, domates, Kars tereyağı, Felovia çeşnisi, mascarpone, kekikli sıvı tuz, pesto rosso sos"
+          "name": "Üç Peynir",
+          "price": 425,
+          "desc": "Kars taze kaşar (100g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g)",
+          "image": "/images/uc-peynir.jpg"
         },
         {
           "name": "Hindi Füme",
           "price": 465,
-          "desc": "Hindi füme, dil peyniri, marul, domates, trüflü sıvı tuz, mascarpone peyniri, pesto sos"
+          "desc": "Hindi füme (60g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g)",
+          "image": "/images/hindi-fume.jpg"
         }
       ]
     },
@@ -32,79 +34,93 @@ export const menu = {
       "note": "Ekmek seçenekleri: Focaccia, Baget, Ciabatta",
       "items": [
         {
-          "name": "Tiftiko Dil Peyniri",
-          "price": 890,
-          "desc": "Tiftik et (120gr), dil peyniri, roka, domates, Kars tereyağı, Felovia çeşnisi, mascarpone, trüflü sıvı tuz, pesto rosso sos"
-        },
-        {
-          "name": "Tiftiko Burrata",
-          "price": 1140,
-          "desc": "Tiftik et (120gr), burrata peyniri, roka, domates, Kars tereyağı, Felovia çeşnisi, balzamik glaze, mascarpone, kekikli sıvı tuz, pesto sos"
-        },
-        {
-          "name": "Tiftiko Mozzarella",
-          "price": 990,
-          "desc": "Tiftik et (120gr), mozzarella peyniri, roka, domates, Kars tereyağı, Felovia çeşnisi, mascarpone, kekikli sıvı tuz, pesto rosso sos"
-        },
-        {
-          "name": "Napoli Burrata",
-          "price": 725,
-          "desc": "Burrata peyniri, roka, domates, zeytinyağı, Felovia çeşnisi, balzamik glaze, mascarpone, kekikli sıvı tuz, pesto sos"
-        },
-        {
-          "name": "Napoli Kaburga Füme",
-          "price": 860,
-          "desc": "Burrata peyniri, dana kaburga füme, roka, domates, zeytinyağı, Felovia çeşnisi, balzamik glaze, mascarpone, kekikli sıvı tuz, pesto sos"
-        },
-        {
-          "name": "Napoli Dana Jambon",
-          "price": 795,
-          "desc": "Burrata peyniri, dana jambon, roka, domates, zeytinyağı, Felovia çeşnisi, balzamik glaze, mascarpone, kekikli sıvı tuz, pesto sos"
-        },
-        {
-          "name": "Napoli Hindi Füme",
-          "price": 765,
-          "desc": "Burrata peyniri, hindi füme, roka, domates, zeytinyağı, Felovia çeşnisi, balzamik glaze, mascarpone, kekikli sıvı tuz, pesto sos"
-        },
-        {
           "name": "Dana Kaburga Füme",
           "price": 560,
-          "desc": "Dana kaburga füme, dil peyniri, marul, domates, trüflü sıvı tuz, mascarpone peyniri, pesto sos"
+          "desc": "Dana kaburga füme (80g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g)",
+          "image": "/images/dana-kaburga-fume.jpg"
         },
         {
           "name": "Dana Jambon",
           "price": 495,
-          "desc": "Dana jambon, dil peyniri, marul, domates, trüflü sıvı tuz, mascarpone peyniri, pesto sos"
+          "desc": "Dana jambon (60g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g)",
+          "image": "/images/dana-jambon.jpg"
         },
         {
           "name": "Hindi Füme",
           "price": 465,
-          "desc": "Hindi füme, dil peyniri, marul, domates, trüflü sıvı tuz, mascarpone peyniri, pesto sos"
+          "desc": "Hindi füme (60g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g)",
+          "image": "/images/hindi-fume.jpg"
         },
         {
           "name": "Üç Peynir",
           "price": 425,
-          "desc": "Kars taze kaşar, dil peyniri, marul, domates, trüflü sıvı tuz, mascarpone peyniri, pesto sos"
+          "desc": "Kars taze kaşar (100g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g)",
+          "image": "/images/uc-peynir.jpg"
         },
         {
           "name": "Feloviç Mozzarella",
           "price": 525,
-          "desc": "Mozzarella peyniri, roka, domates, zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos"
+          "desc": "Mozzarella peyniri (120g), roka (50g), domates (130g), zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g)",
+          "image": "/images/felovic-mozzarella.jpg"
         },
         {
           "name": "Feloviç Kaburga Füme",
           "price": 660,
-          "desc": "Dana kaburga füme, mozzarella peyniri, roka, domates, zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos"
+          "desc": "Dana kaburga füme (80g), mozzarella peyniri (120g), roka (50g), domates (130g), zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g)",
+          "image": "/images/felovic-kaburga-fume.jpg"
         },
         {
           "name": "Feloviç Dana Jambon",
           "price": 595,
-          "desc": "Dana jambon, mozzarella peyniri, roka, domates, zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos"
+          "desc": "Dana jambon (60g), mozzarella peyniri (120g), roka (50g), domates (130g), zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g)",
+          "image": "/images/felovic-dana-jambon.jpg"
         },
         {
           "name": "Feloviç Hindi Füme",
           "price": 565,
-          "desc": "Hindi füme, mozzarella peyniri, roka, domates, zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos"
+          "desc": "Hindi füme (60g), mozzarella peyniri (120g), roka (50g), domates (130g), zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g)",
+          "image": "/images/felovic-hindi-fume.jpg"
+        },
+        {
+          "name": "Napoli Burrata",
+          "price": 725,
+          "desc": "Burrata peyniri (1 adet), roka (40g), domates (60g), zeytinyağı, Felovia çeşnisi, balzamik glaze (20g), mascarpone (20g), kekikli sıvı tuz, pesto sos (20g)",
+          "image": "/images/napoli-buratta.jpg"
+        },
+        {
+          "name": "Napoli Kaburga Füme",
+          "price": 860,
+          "desc": "Burrata peyniri (1 adet), dana kaburga füme (50g), roka (40g), domates (60g), zeytinyağı, Felovia çeşnisi, balzamik glaze (20g), mascarpone (20g), kekikli sıvı tuz, pesto sos (20g)",
+          "image": "/images/napoli-kaburga-fume.jpg"
+        },
+        {
+          "name": "Napoli Dana Jambon",
+          "price": 795,
+          "desc": "Burrata peyniri (1 adet), dana jambon (40g), roka (40g), domates (60g), zeytinyağı, Felovia çeşnisi, balzamik glaze (20g), mascarpone (20g), kekikli sıvı tuz, pesto sos (20g)",
+          "image": "/images/napoli-dana-jambon.jpg"
+        },
+        {
+          "name": "Napoli Hindi Füme",
+          "price": 765,
+          "desc": "Burrata peyniri (1 adet), hindi füme (40g), roka (40g), domates (60g), zeytinyağı, Felovia çeşnisi, balzamik glaze (20g), mascarpone (20g), kekikli sıvı tuz, pesto sos (20g)",
+          "image": "/images/napoli-hindi-fume.jpg"
+        },
+        {
+          "name": "Tiftiko Dil Peyniri",
+          "price": 890,
+          "desc": "Tiftik et (120g), dil peyniri (80g), roka (40g), domates (60g), Kars tereyağı (10g), Felovia çeşnisi, mascarpone (20g), trüflü sıvı tuz, pesto rosso sos (20g)"
+        },
+        {
+          "name": "Tiftiko Burrata",
+          "price": 1140,
+          "desc": "Tiftik et (120g), burrata peyniri (1 adet), roka (40g), domates (60g), Kars tereyağı (10g), Felovia çeşnisi, balzamik glaze (20g), mascarpone (20g), kekikli sıvı tuz, pesto sos (20g)",
+          "image": "/images/tiftiko-burrata.jpg"
+        },
+        {
+          "name": "Tiftiko Mozzarella",
+          "price": 990,
+          "desc": "Tiftik et (120g), mozzarella peyniri (1 adet), roka (40g), domates (60g), Kars tereyağı (10g), Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g)",
+          "image": "/images/tiftiko-mozzarella.jpg"
         }
       ]
     },
@@ -115,42 +131,42 @@ export const menu = {
         {
           "name": "Karışık Tost",
           "price": 425,
-          "desc": "Dana sucuk, Kars taze kaşar, lütenitsa sos"
+          "desc": "Dana sucuk (60g), Kars taze kaşar (100g), lütenitsa sos (60g)"
         },
         {
           "name": "Kaşarlı Tost",
           "price": 360,
-          "desc": "Kars taze kaşar, lütenitsa sos"
+          "desc": "Kars taze kaşar (110g), lütenitsa sos (60g)"
         },
         {
           "name": "Pestolu Kaşarlı Tost",
           "price": 360,
-          "desc": "Kars taze kaşar, pesto sos"
+          "desc": "Kars taze kaşar (110g), pesto sos (50g)"
         },
         {
           "name": "Hindi Fümeli Tost",
           "price": 390,
-          "desc": "Hindi füme, Kars taze kaşar, lütenitsa sos"
+          "desc": "Hindi füme (40g), Kars taze kaşar (100g), lütenitsa sos (60g)"
         },
         {
           "name": "Kaburga Fümeli Tost",
           "price": 525,
-          "desc": "Kaburga füme, Kars taze kaşar, lütenitsa sos"
+          "desc": "Kaburga füme (60g), Kars taze kaşar (100g), lütenitsa sos (60g)"
         },
         {
           "name": "Gusto Tost",
           "price": 690,
-          "desc": "Dana sucuk, dana jambon, Kars taze kaşar, domates, acı biber salçası, lütenitsa sos"
+          "desc": "Dana sucuk (60g), dana jambon (40g), Kars taze kaşar (100g), domates (50g), turşu (40g), acı biber salçası (30g), lütenitsa sos (60g)"
         },
         {
           "name": "Bello Tost",
           "price": 485,
-          "desc": "Dana sucuk, Kars taze kaşar, mascarpone peyniri, acı biber salçası"
+          "desc": "Dana sucuk (60g), Kars taze kaşar (100g), mascarpone peyniri (20g), acı biber salçası (30g)"
         },
         {
           "name": "Şefin Tostu",
           "price": 640,
-          "desc": "İki kat dana sucuk, domates, kornişon turşu, acı biber salçası, lütenitsa sos"
+          "desc": "İki kat dana sucuk (130g), domates (50g), kornişon turşu (40g), acı biber salçası (30g), lütenitsa sos (60g)"
         }
       ]
     },
