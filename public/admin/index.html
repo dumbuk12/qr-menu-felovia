@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Felovia Gurme — Yönetim Paneli</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --olive-deep: #343c17;
+    --olive: #4b5626;
+    --olive-light: #5c6832;
+    --cream: #f2eedd;
+    --cream-soft: #c9c8ad;
+    --gold: #cfa75e;
+    --line: #64703a;
+    --red: #c1594b;
+    --display: "Cormorant Garamond", Georgia, serif;
+    --body: "Karla", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--olive-deep);
+    color: var(--cream);
+    font-family: var(--body);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  input, textarea {
+    font-family: var(--body);
+    background: var(--olive-deep);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--cream);
+    padding: 0.5rem 0.6rem;
+    font-size: 0.95rem;
+    width: 100%;
+  }
+  input:focus, textarea:focus, button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 1px;
+  }
+  textarea { resize: vertical; min-height: 3.2em; }
+  button {
+    font-family: var(--body);
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    padding: 0.55rem 1rem;
+    font-size: 0.9rem;
+  }
+  .btn-gold { background: var(--gold); color: var(--olive-deep); }
+  .btn-gold:hover { filter: brightness(1.08); }
+  .btn-ghost { background: transparent; color: var(--cream-soft); border: 1px solid var(--line); }
+  .btn-ghost:hover { color: var(--cream); border-color: var(--cream-soft); }
+  .btn-danger { background: transparent; color: var(--red); border: 1px solid var(--red); }
+  .btn-danger:hover { background: var(--red); color: var(--cream); }
+
+  /* ---- Login ---- */
+  #login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  #login-screen form {
+    background: var(--olive);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 340px;
+    text-align: center;
+  }
+  #login-screen h1 {
+    font-family: var(--display);
+    font-size: 1.8rem;
+    margin: 0 0 1.25rem;
+  }
+  #login-screen input { margin-bottom: 0.9rem; }
+  #login-screen button { width: 100%; }
+  #login-error {
+    color: var(--red);
+    font-size: 0.85rem;
+    margin-top: 0.75rem;
+    min-height: 1.1em;
+  }
+
+  /* ---- App ---- */
+  #app { display: none; max-width: 900px; margin: 0 auto; padding: 1.5rem 1.25rem 6rem; }
+  header.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  header.top h1 {
+    font-family: var(--display);
+    font-size: 1.7rem;
+    margin: 0;
+  }
+  header.top .sub { color: var(--cream-soft); font-size: 0.8rem; letter-spacing: 0.05em; }
+
+  .category {
+    background: var(--olive);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .category-head {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  .category-head .fields { flex: 1; display: grid; gap: 0.5rem; }
+  .category-head input { font-family: var(--display); font-size: 1.15rem; font-weight: 700; }
+  .category-head .note-input { font-family: var(--body); font-size: 0.85rem; font-style: italic; }
+
+  .item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 0.9rem;
+    background: var(--olive-deep);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+  }
+  .item-row { display: flex; gap: 0.5rem; }
+  .item-row .name { flex: 3; }
+  .item-row .price { flex: 1; min-width: 90px; }
+  .item small { color: var(--cream-soft); display: block; margin-bottom: 0.2rem; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .item-actions { display: flex; justify-content: flex-end; }
+
+  .add-item-btn { width: 100%; margin-top: 0.25rem; }
+
+  #add-category-btn { display: block; margin: 0 auto 2rem; }
+
+  #save-bar {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    background: var(--olive);
+    border-top: 1px solid var(--line);
+    padding: 0.9rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    z-index: 10;
+  }
+  #save-status { color: var(--cream-soft); font-size: 0.85rem; min-width: 140px; text-align: right; }
+  #save-status.ok { color: var(--gold); }
+  #save-status.err { color: var(--red); }
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <form id="login-form">
+    <h1>Felovia Yönetim</h1>
+    <input type="password" id="password" placeholder="Şifre" autocomplete="current-password" required />
+    <button type="submit" class="btn-gold">Giriş yap</button>
+    <div id="login-error"></div>
+  </form>
+</div>
+
+<div id="app">
+  <header class="top">
+    <div>
+      <h1>Menü Yönetimi</h1>
+      <div class="sub">Felovia Gurme</div>
+    </div>
+    <button id="logout-btn" class="btn-ghost">Çıkış yap</button>
+  </header>
+
+  <div id="categories"></div>
+  <button id="add-category-btn" class="btn-ghost">+ Kategori ekle</button>
+</div>
+
+<div id="save-bar" style="display:none;">
+  <button id="save-btn" class="btn-gold">Değişiklikleri kaydet</button>
+  <span id="save-status"></span>
+</div>
+
+<script>
+  let menu = null;
+
+  const loginScreen = document.getElementById("login-screen");
+  const app = document.getElementById("app");
+  const saveBar = document.getElementById("save-bar");
+  const categoriesEl = document.getElementById("categories");
+  const saveStatus = document.getElementById("save-status");
+
+  async function api(path, options = {}) {
+    const res = await fetch(path, {
+      ...options,
+      headers: { "Content-Type": "application/json", ...(options.headers || {}) },
+    });
+    if (res.status === 401) throw { unauthorized: true };
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || "Bir hata oluştu");
+    return data;
+  }
+
+  function showApp() {
+    loginScreen.style.display = "none";
+    app.style.display = "block";
+    saveBar.style.display = "flex";
+  }
+  function showLogin(message) {
+    loginScreen.style.display = "flex";
+    app.style.display = "none";
+    saveBar.style.display = "none";
+    document.getElementById("login-error").textContent = message || "";
+  }
+
+  function render() {
+    categoriesEl.innerHTML = "";
+    menu.categories.forEach((cat, ci) => {
+      const catEl = document.createElement("div");
+      catEl.className = "category";
+
+      const head = document.createElement("div");
+      head.className = "category-head";
+      head.innerHTML = `
+        <div class="fields">
+          <input class="cat-name" value="${escapeAttr(cat.name || "")}" placeholder="Kategori adı" />
+          <input class="note-input" value="${escapeAttr(cat.note || "")}" placeholder="Not (opsiyonel)" />
+        </div>
+        <button class="btn-danger del-cat">Kategoriyi sil</button>
+      `;
+      head.querySelector(".cat-name").addEventListener("input", (e) => (cat.name = e.target.value));
+      head.querySelector(".note-input").addEventListener("input", (e) => (cat.note = e.target.value));
+      head.querySelector(".del-cat").addEventListener("click", () => {
+        if (confirm(`"${cat.name}" kategorisini silmek istediğine emin misin?`)) {
+          menu.categories.splice(ci, 1);
+          render();
+        }
+      });
+      catEl.appendChild(head);
+
+      cat.items.forEach((item, ii) => {
+        catEl.appendChild(renderItem(item, cat, ii));
+      });
+
+      const addItemBtn = document.createElement("button");
+      addItemBtn.className = "btn-ghost add-item-btn";
+      addItemBtn.textContent = "+ Ürün ekle";
+      addItemBtn.addEventListener("click", () => {
+        cat.items.push({ name: "", price: 0, desc: "", image: "" });
+        render();
+      });
+      catEl.appendChild(addItemBtn);
+
+      categoriesEl.appendChild(catEl);
+    });
+  }
+
+  function renderItem(item, cat, ii) {
+    const el = document.createElement("div");
+    el.className = "item";
+    el.innerHTML = `
+      <div class="item-row">
+        <div class="name">
+          <small>Ürün adı</small>
+          <input class="i-name" value="${escapeAttr(item.name || "")}" />
+        </div>
+        <div class="price">
+          <small>Fiyat (₺)</small>
+          <input class="i-price" type="number" min="0" step="1" value="${item.price ?? 0}" />
+        </div>
+      </div>
+      <div>
+        <small>Açıklama</small>
+        <textarea class="i-desc">${escapeHtml(item.desc || "")}</textarea>
+      </div>
+      <div>
+        <small>Görsel yolu</small>
+        <input class="i-image" value="${escapeAttr(item.image || "")}" placeholder="/images/..." />
+      </div>
+      <div class="item-actions">
+        <button class="btn-danger del-item">Ürünü sil</button>
+      </div>
+    `;
+    el.querySelector(".i-name").addEventListener("input", (e) => (item.name = e.target.value));
+    el.querySelector(".i-price").addEventListener("input", (e) => (item.price = parseFloat(e.target.value) || 0));
+    el.querySelector(".i-desc").addEventListener("input", (e) => (item.desc = e.target.value));
+    el.querySelector(".i-image").addEventListener("input", (e) => (item.image = e.target.value));
+    el.querySelector(".del-item").addEventListener("click", () => {
+      cat.items.splice(ii, 1);
+      render();
+    });
+    return el;
+  }
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+  }
+  function escapeAttr(str) {
+    return escapeHtml(str).replace(/"/g, "&quot;");
+  }
+
+  document.getElementById("add-category-btn").addEventListener("click", () => {
+    menu.categories.push({ name: "", note: "", items: [] });
+    render();
+  });
+
+  document.getElementById("save-btn").addEventListener("click", async () => {
+    saveStatus.className = "";
+    saveStatus.textContent = "Kaydediliyor…";
+    try {
+      await api("/admin/api/menu", { method: "PUT", body: JSON.stringify(menu) });
+      saveStatus.className = "ok";
+      saveStatus.textContent = "Kaydedildi ✓";
+    } catch (err) {
+      if (err.unauthorized) return showLogin("Oturum sona erdi, tekrar giriş yap.");
+      saveStatus.className = "err";
+      saveStatus.textContent = err.message || "Kaydedilemedi";
+    }
+  });
+
+  document.getElementById("logout-btn").addEventListener("click", async () => {
+    await fetch("/admin/api/logout", { method: "POST" }).catch(() => {});
+    showLogin();
+  });
+
+  document.getElementById("login-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const password = document.getElementById("password").value;
+    const btn = e.target.querySelector("button");
+    btn.disabled = true;
+    try {
+      await api("/admin/api/login", { method: "POST", body: JSON.stringify({ password }) });
+      document.getElementById("password").value = "";
+      await loadMenu();
+    } catch (err) {
+      document.getElementById("login-error").textContent = err.message || "Giriş başarısız";
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  async function loadMenu() {
+    try {
+      menu = await api("/admin/api/menu");
+      render();
+      showApp();
+    } catch (err) {
+      if (err.unauthorized) return showLogin();
+      showLogin(err.message || "Menü yüklenemedi");
+    }
+  }
+
+  loadMenu();
+</script>
+</body>
+</html>

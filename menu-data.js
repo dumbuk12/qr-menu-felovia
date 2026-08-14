@@ -1,4 +1,4 @@
-// Felovia Gurme — menü verisi.
+// Felovia Gurme — menü verisi. Menüyü değiştirmek için BU dosyayı düzenleyin.
 
 export const menu = {
   "restaurant": "Felovia Gurme",
@@ -12,19 +12,19 @@ export const menu = {
         {
           "name": "Feloviç Kaburga Füme",
           "price": 660,
-          "desc": "Dana kaburga füme (80g), mozzarella peyniri (120g), roka (50g), domates (130g), zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g) · ~980 kcal",
+          "desc": "Dana kaburga füme (80g), mozzarella peyniri (120g), roka (50g), domates (130g), zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g) · ~1200 kcal",
           "image": "/images/felovic-kaburga-fume.jpg"
         },
         {
           "name": "Üç Peynir",
           "price": 425,
-          "desc": "Kars taze kaşar (100g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g) · ~1020 kcal",
+          "desc": "Kars taze kaşar (100g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g) · ~1240 kcal",
           "image": "/images/uc-peynir.jpg"
         },
         {
           "name": "Hindi Füme",
           "price": 465,
-          "desc": "Hindi füme (60g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g) · ~760 kcal",
+          "desc": "Hindi füme (60g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g) · ~980 kcal",
           "image": "/images/hindi-fume.jpg"
         }
       ]
@@ -36,90 +36,91 @@ export const menu = {
         {
           "name": "Dana Kaburga Füme",
           "price": 560,
-          "desc": "Dana kaburga füme (80g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g) · ~920 kcal",
+          "desc": "Dana kaburga füme (80g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g) · ~1135 kcal",
           "image": "/images/dana-kaburga-fume.jpg"
         },
         {
           "name": "Dana Jambon",
           "price": 495,
-          "desc": "Dana jambon (60g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g) · ~800 kcal",
+          "desc": "Dana jambon (60g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g) · ~1015 kcal",
           "image": "/images/dana-jambon.jpg"
         },
         {
           "name": "Hindi Füme",
           "price": 465,
-          "desc": "Hindi füme (60g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g) · ~760 kcal",
+          "desc": "Hindi füme (60g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g) · ~980 kcal",
           "image": "/images/hindi-fume.jpg"
         },
         {
           "name": "Üç Peynir",
           "price": 425,
-          "desc": "Kars taze kaşar (100g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g) · ~1020 kcal",
+          "desc": "Kars taze kaşar (100g), dil peyniri (80g), marul (20g), domates (130g), trüflü sıvı tuz, mascarpone peyniri (20g), pesto sos (20g) · ~1240 kcal",
           "image": "/images/uc-peynir.jpg"
         },
         {
           "name": "Feloviç Mozzarella",
           "price": 525,
-          "desc": "Mozzarella peyniri (120g), roka (50g), domates (130g), zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g) · ~760 kcal",
+          "desc": "Mozzarella peyniri (120g), roka (50g), domates (130g), zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g) · ~975 kcal",
           "image": "/images/felovic-mozzarella.jpg"
         },
         {
           "name": "Feloviç Kaburga Füme",
           "price": 660,
-          "desc": "Dana kaburga füme (80g), mozzarella peyniri (120g), roka (50g), domates (130g), zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g) · ~980 kcal",
+          "desc": "Dana kaburga füme (80g), mozzarella peyniri (120g), roka (50g), domates (130g), zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g) · ~1200 kcal",
           "image": "/images/felovic-kaburga-fume.jpg"
         },
         {
           "name": "Feloviç Dana Jambon",
           "price": 595,
-          "desc": "Dana jambon (60g), mozzarella peyniri (120g), roka (50g), domates (130g), zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g) · ~860 kcal",
+          "desc": "Dana jambon (60g), mozzarella peyniri (120g), roka (50g), domates (130g), zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g) · ~1080 kcal",
           "image": "/images/felovic-dana-jambon.jpg"
         },
         {
           "name": "Feloviç Hindi Füme",
           "price": 565,
-          "desc": "Hindi füme (60g), mozzarella peyniri (120g), roka (50g), domates (130g), zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g) · ~825 kcal",
+          "desc": "Hindi füme (60g), mozzarella peyniri (120g), roka (50g), domates (130g), zeytinyağı, Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g) · ~1040 kcal",
           "image": "/images/felovic-hindi-fume.jpg"
         },
         {
           "name": "Napoli Burrata",
           "price": 725,
-          "desc": "Burrata peyniri (1 adet), roka (40g), domates (60g), zeytinyağı, Felovia çeşnisi, balzamik glaze (20g), mascarpone (20g), kekikli sıvı tuz, pesto sos (20g) · ~970 kcal",
+          "desc": "Burrata peyniri (1 adet), roka (40g), domates (60g), zeytinyağı, Felovia çeşnisi, balzamik glaze (20g), mascarpone (20g), kekikli sıvı tuz, pesto sos (20g) · ~1185 kcal",
           "image": "/images/napoli-buratta.jpg"
         },
         {
           "name": "Napoli Kaburga Füme",
           "price": 860,
-          "desc": "Burrata peyniri (1 adet), dana kaburga füme (50g), roka (40g), domates (60g), zeytinyağı, Felovia çeşnisi, balzamik glaze (20g), mascarpone (20g), kekikli sıvı tuz, pesto sos (20g) · ~1110 kcal",
+          "desc": "Burrata peyniri (1 adet), dana kaburga füme (50g), roka (40g), domates (60g), zeytinyağı, Felovia çeşnisi, balzamik glaze (20g), mascarpone (20g), kekikli sıvı tuz, pesto sos (20g) · ~1325 kcal",
           "image": "/images/napoli-kaburga-fume.jpg"
         },
         {
           "name": "Napoli Dana Jambon",
           "price": 795,
-          "desc": "Burrata peyniri (1 adet), dana jambon (40g), roka (40g), domates (60g), zeytinyağı, Felovia çeşnisi, balzamik glaze (20g), mascarpone (20g), kekikli sıvı tuz, pesto sos (20g) · ~1035 kcal",
+          "desc": "Burrata peyniri (1 adet), dana jambon (40g), roka (40g), domates (60g), zeytinyağı, Felovia çeşnisi, balzamik glaze (20g), mascarpone (20g), kekikli sıvı tuz, pesto sos (20g) · ~1255 kcal",
           "image": "/images/napoli-dana-jambon.jpg"
         },
         {
           "name": "Napoli Hindi Füme",
           "price": 765,
-          "desc": "Burrata peyniri (1 adet), hindi füme (40g), roka (40g), domates (60g), zeytinyağı, Felovia çeşnisi, balzamik glaze (20g), mascarpone (20g), kekikli sıvı tuz, pesto sos (20g) · ~1010 kcal",
+          "desc": "Burrata peyniri (1 adet), hindi füme (40g), roka (40g), domates (60g), zeytinyağı, Felovia çeşnisi, balzamik glaze (20g), mascarpone (20g), kekikli sıvı tuz, pesto sos (20g) · ~1230 kcal",
           "image": "/images/napoli-hindi-fume.jpg"
         },
         {
           "name": "Tiftiko Dil Peyniri",
           "price": 890,
-          "desc": "Tiftik et (120g), dil peyniri (80g), roka (40g), domates (60g), Kars tereyağı (10g), Felovia çeşnisi, mascarpone (20g), trüflü sıvı tuz, pesto rosso sos (20g) · ~1080 kcal"
+          "desc": "Tiftik et (120g), dil peyniri (80g), roka (40g), domates (60g), Kars tereyağı (10g), Felovia çeşnisi, mascarpone (20g), trüflü sıvı tuz, pesto rosso sos (20g) · ~1295 kcal",
+          "image": "/images/tiftiko-dil-peyniri.jpg"
         },
         {
           "name": "Tiftiko Burrata",
           "price": 1140,
-          "desc": "Tiftik et (120g), burrata peyniri (1 adet), roka (40g), domates (60g), Kars tereyağı (10g), Felovia çeşnisi, balzamik glaze (20g), mascarpone (20g), kekikli sıvı tuz, pesto sos (20g) · ~1305 kcal",
+          "desc": "Tiftik et (120g), burrata peyniri (1 adet), roka (40g), domates (60g), Kars tereyağı (10g), Felovia çeşnisi, balzamik glaze (20g), mascarpone (20g), kekikli sıvı tuz, pesto sos (20g) · ~1525 kcal",
           "image": "/images/tiftiko-burrata.jpg"
         },
         {
           "name": "Tiftiko Mozzarella",
           "price": 990,
-          "desc": "Tiftik et (120g), mozzarella peyniri (1 adet), roka (40g), domates (60g), Kars tereyağı (10g), Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g) · ~1100 kcal",
+          "desc": "Tiftik et (120g), mozzarella peyniri (1 adet), roka (40g), domates (60g), Kars tereyağı (10g), Felovia çeşnisi, kekikli sıvı tuz, pesto rosso sos (20g) · ~1315 kcal",
           "image": "/images/tiftiko-mozzarella.jpg"
         }
       ]
@@ -131,42 +132,50 @@ export const menu = {
         {
           "name": "Karışık Tost",
           "price": 425,
-          "desc": "Dana sucuk (60g), Kars taze kaşar (100g), lütenitsa sos (60g)"
+          "desc": "Dana sucuk (60g), Kars taze kaşar (100g), lütenitsa sos (60g) · ~920 kcal",
+          "image": "/images/karisik-tost.jpg"
         },
         {
           "name": "Kaşarlı Tost",
           "price": 360,
-          "desc": "Kars taze kaşar (110g), lütenitsa sos (60g)"
+          "desc": "Kars taze kaşar (110g), lütenitsa sos (60g) · ~685 kcal",
+          "image": "/images/kasarli-tost.jpg"
         },
         {
           "name": "Pestolu Kaşarlı Tost",
           "price": 360,
-          "desc": "Kars taze kaşar (110g), pesto sos (50g)"
+          "desc": "Kars taze kaşar (110g), pesto sos (50g) · ~830 kcal",
+          "image": "/images/pestolu-kasarli-tost.jpg"
         },
         {
           "name": "Hindi Fümeli Tost",
           "price": 390,
-          "desc": "Hindi füme (40g), Kars taze kaşar (100g), lütenitsa sos (60g)"
+          "desc": "Hindi füme (40g), Kars taze kaşar (100g), lütenitsa sos (60g) · ~695 kcal",
+          "image": "/images/hindi-fumeli-tost.jpg"
         },
         {
           "name": "Kaburga Fümeli Tost",
           "price": 525,
-          "desc": "Kaburga füme (60g), Kars taze kaşar (100g), lütenitsa sos (60g)"
+          "desc": "Kaburga füme (60g), Kars taze kaşar (100g), lütenitsa sos (60g) · ~820 kcal",
+          "image": "/images/kaburga-fumeli-tost.jpg"
         },
         {
           "name": "Gusto Tost",
           "price": 690,
-          "desc": "Dana sucuk (60g), dana jambon (40g), Kars taze kaşar (100g), domates (50g), turşu (40g), acı biber salçası (30g), lütenitsa sos (60g)"
+          "desc": "Dana sucuk (60g), dana jambon (40g), Kars taze kaşar (100g), domates (50g), turşu (40g), acı biber salçası (30g), lütenitsa sos (60g) · ~1030 kcal",
+          "image": "/images/gusto-tost.jpg"
         },
         {
           "name": "Bello Tost",
           "price": 485,
-          "desc": "Dana sucuk (60g), Kars taze kaşar (100g), mascarpone peyniri (20g), acı biber salçası (30g)"
+          "desc": "Dana sucuk (60g), Kars taze kaşar (100g), mascarpone peyniri (20g), acı biber salçası (30g) · ~960 kcal",
+          "image": "/images/bello-tost.jpg"
         },
         {
           "name": "Şefin Tostu",
           "price": 640,
-          "desc": "İki kat dana sucuk (130g), domates (50g), kornişon turşu (40g), acı biber salçası (30g), lütenitsa sos (60g)"
+          "desc": "İki kat dana sucuk (130g), domates (50g), kornişon turşu (40g), acı biber salçası (30g), lütenitsa sos (60g) · ~950 kcal",
+          "image": "/images/sefin-tostu.jpg"
         }
       ]
     },
