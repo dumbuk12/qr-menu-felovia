@@ -15,8 +15,9 @@
     --gold: #cfa75e;
     --line: #64703a;
     --red: #c1594b;
-    --display: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --green: #6a9c4a;
+    --display: "Cormorant Garamond", Georgia, serif;
+    --body: "Karla", system-ui, sans-serif;
   }
   * { box-sizing: border-box; }
   body {
@@ -27,7 +28,7 @@
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
   }
-  input, textarea {
+  input, textarea, select {
     font-family: var(--body);
     background: var(--olive-deep);
     border: 1px solid var(--line);
@@ -37,7 +38,7 @@
     font-size: 0.95rem;
     width: 100%;
   }
-  input:focus, textarea:focus, button:focus-visible {
+  input:focus, textarea:focus, select:focus, button:focus-visible {
     outline: 2px solid var(--gold);
     outline-offset: 1px;
   }
@@ -53,10 +54,13 @@
   }
   .btn-gold { background: var(--gold); color: var(--olive-deep); }
   .btn-gold:hover { filter: brightness(1.08); }
+  .btn-gold:disabled { opacity: 0.5; cursor: not-allowed; }
   .btn-ghost { background: transparent; color: var(--cream-soft); border: 1px solid var(--line); }
   .btn-ghost:hover { color: var(--cream); border-color: var(--cream-soft); }
   .btn-danger { background: transparent; color: var(--red); border: 1px solid var(--red); }
   .btn-danger:hover { background: var(--red); color: var(--cream); }
+  .btn-green { background: var(--green); color: var(--cream); }
+  .btn-green:hover { filter: brightness(1.08); }
 
   /* ---- Login ---- */
   #login-screen {
@@ -90,7 +94,7 @@
   }
 
   /* ---- App ---- */
-  #app { display: none; max-width: 900px; margin: 0 auto; padding: 1.5rem 1.25rem 6rem; }
+  #app { display: none; max-width: 1100px; margin: 0 auto; padding: 1.5rem 1.25rem 6rem; }
   header.top {
     display: flex;
     align-items: center;
@@ -106,6 +110,15 @@
     margin: 0;
   }
   header.top .sub { color: var(--cream-soft); font-size: 0.8rem; letter-spacing: 0.05em; }
+
+  .toolbar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .toolbar .spacer { flex: 1; }
 
   .category {
     background: var(--olive);
@@ -134,11 +147,12 @@
     border-radius: 8px;
     margin-bottom: 0.75rem;
   }
-  .item-row { display: flex; gap: 0.5rem; }
-  .item-row .name { flex: 3; }
+  .item-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .item-row .name { flex: 3; min-width: 180px; }
   .item-row .price { flex: 1; min-width: 90px; }
+  .item-row .image-preview { flex: 0 0 80px; }
   .item small { color: var(--cream-soft); display: block; margin-bottom: 0.2rem; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; }
-  .item-actions { display: flex; justify-content: flex-end; }
+  .item-actions { display: flex; justify-content: flex-end; gap: 0.5rem; }
 
   .add-item-btn { width: 100%; margin-top: 0.25rem; }
 
@@ -157,9 +171,187 @@
     z-index: 10;
   }
   #save-status { color: var(--cream-soft); font-size: 0.85rem; min-width: 140px; text-align: right; }
-  #save-status.ok { color: var(--gold); }
+  #save-status.ok { color: var(--green); }
   #save-status.err { color: var(--red); }
+
+  /* ---- Image upload area ---- */
+  .image-upload {
+    border: 2px dashed var(--line);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    transition: border-color 0.15s, background 0.15s;
+    cursor: pointer;
+  }
+  .image-upload:hover, .image-upload.drag-over {
+    border-color: var(--gold);
+    background: color-mix(in srgb, var(--gold) 10%, transparent);
+  }
+  .image-upload input[type="file"] { display: none; }
+  .image-upload .upload-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .image-upload p { margin: 0; color: var(--cream-soft); font-size: 0.85rem; }
+  .image-upload .hint { font-size: 0.7rem; color: var(--cream-soft); opacity: 0.7; margin-top: 0.25rem; }
+
+  .image-preview-wrap {
+    position: relative;
+    display: inline-block;
+  }
+  .image-preview-wrap img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+  }
+  .image-preview-wrap .remove-img {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--red);
+    color: var(--cream);
+    border: none;
+    font-size: 1rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .image-preview-wrap:hover .remove-img { opacity: 1; }
+
+  /* ---- Image Gallery Modal ---- */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--olive);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: 720px;
+    display: flex;
+    flex-direction: column;
+  }
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .modal-header h3 { margin: 0; font-family: var(--display); font-size: 1.25rem; }
+  .modal-close { background: none; border: none; color: var(--cream-soft); font-size: 1.5rem; line-height: 1; padding: 0.25rem; }
+  .modal-close:hover { color: var(--cream); }
+  .modal-body { padding: 1rem 1.25rem; overflow-y: auto; flex: 1; }
+  .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.75rem; }
+  .image-grid-item {
+    position: relative;
+    aspect-ratio: 4/3;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .image-grid-item:hover { transform: scale(1.02); }
+  .image-grid-item.selected { border-color: var(--gold); }
+  .image-grid-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .image-grid-item .checkmark {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 24px;
+    height: 24px;
+    background: var(--gold);
+    color: var(--olive-deep);
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+  }
+  .image-grid-item.selected .checkmark { display: flex; }
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+
+  /* ---- Toast notifications ---- */
+  .toast-container {
+    position: fixed;
+    bottom: 80px;
+    right: 1rem;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .toast {
+    background: var(--olive);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 220px;
+    max-width: 360px;
+    animation: slide-in 0.3s ease-out;
+  }
+  .toast.success { border-color: var(--green); }
+  .toast.error { border-color: var(--red); }
+  .toast.info { border-color: var(--gold); }
+  @keyframes slide-in { from { opacity: 0; transform: translateX(100%); } to { opacity: 1; transform: translateX(0); } }
+  .toast.removing { animation: slide-out 0.3s ease-in forwards; }
+  @keyframes slide-out { to { opacity: 0; transform: translateX(100%); } }
+  .toast-icon { font-size: 1.1rem; }
+  .toast.success .toast-icon { color: var(--green); }
+  .toast.error .toast-icon { color: var(--red); }
+  .toast.info .toast-icon { color: var(--gold); }
+  .toast-message { flex: 1; font-size: 0.85rem; }
+
+  /* ---- Drag and drop for items ---- */
+  .item.dragging { opacity: 0.4; border-color: var(--gold); }
+  .category .items-list { display: flex; flex-direction: column; gap: 0.5rem; }
+  .category .items-list .drop-zone { border: 2px dashed var(--gold); border-radius: 8px; padding: 1rem; text-align: center; color: var(--gold); font-size: 0.85rem; display: none; }
+  .category .items-list .drop-zone.active { display: block; }
+
+  /* ---- Loading spinner ---- */
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--line);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .btn-loading .btn-text { display: none; }
+  .btn-loading .spinner { display: inline-block; }
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
 
@@ -167,7 +359,7 @@
   <form id="login-form">
     <h1>Felovia Yönetim</h1>
     <input type="password" id="password" placeholder="Şifre" autocomplete="current-password" required />
-    <button type="submit" class="btn-gold">Giriş yap</button>
+    <button type="submit" class="btn-gold"><span class="btn-text">Giriş yap</span><span class="spinner" style="display:none;"></span></button>
     <div id="login-error"></div>
   </form>
 </div>
@@ -181,29 +373,80 @@
     <button id="logout-btn" class="btn-ghost">Çıkış yap</button>
   </header>
 
+  <div class="toolbar">
+    <button id="add-category-btn" class="btn-gold">+ Kategori ekle</button>
+    <div class="spacer"></div>
+    <button id="refresh-btn" class="btn-ghost" title="Menüyü yenile">⟳ Yenile</button>
+    <button id="gallery-btn" class="btn-ghost" title="Görsel galerisini aç">🖼 Galerisi</button>
+  </div>
+
   <div id="categories"></div>
-  <button id="add-category-btn" class="btn-ghost">+ Kategori ekle</button>
 </div>
 
 <div id="save-bar" style="display:none;">
-  <button id="save-btn" class="btn-gold">Değişiklikleri kaydet</button>
+  <button id="save-btn" class="btn-gold"><span class="btn-text">Değişiklikleri kaydet</span><span class="spinner" style="display:none;"></span></button>
   <span id="save-status"></span>
 </div>
 
+<!-- Image Gallery Modal -->
+<div class="modal-overlay" id="gallery-modal" role="dialog" aria-modal="true" aria-labelledby="gallery-title">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="gallery-title">Görsel Galerisi</h3>
+      <button class="modal-close" id="gallery-close" aria-label="Kapat">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="image-upload" id="gallery-upload" tabindex="0" role="button" aria-label="Yeni görsel yükle">
+        <div class="upload-icon">+</div>
+        <p>Yeni görsel yükle</p>
+        <p class="hint">JPG, PNG, WebP, GIF, SVG — max 5MB</p>
+        <input type="file" id="gallery-file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" />
+      </div>
+      <div class="image-grid" id="image-grid" role="listbox" aria-label="Yüklenmiş görseller"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" id="gallery-cancel">İptal</button>
+      <button class="btn-gold" id="gallery-select" disabled>Seç</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div class="toast-container" id="toast-container"></div>
+
 <script>
   let menu = null;
+  let galleryImages = [];
+  let gallerySelected = null;
+  let pendingImageInput = null; // which item's image input triggered the gallery
 
   const loginScreen = document.getElementById("login-screen");
   const app = document.getElementById("app");
   const saveBar = document.getElementById("save-bar");
   const categoriesEl = document.getElementById("categories");
   const saveStatus = document.getElementById("save-status");
+  const galleryModal = document.getElementById("gallery-modal");
+  const galleryGrid = document.getElementById("image-grid");
+  const galleryFileInput = document.getElementById("gallery-file-input");
+  const galleryUpload = document.getElementById("gallery-upload");
+  const galleryClose = document.getElementById("gallery-close");
+  const galleryCancel = document.getElementById("gallery-cancel");
+  const gallerySelect = document.getElementById("gallery-select");
+  const toastContainer = document.getElementById("toast-container");
 
   async function api(path, options = {}) {
     const res = await fetch(path, {
       ...options,
       headers: { "Content-Type": "application/json", ...(options.headers || {}) },
     });
+    if (res.status === 401) throw { unauthorized: true };
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || "Bir hata oluştu");
+    return data;
+  }
+
+  async function apiFormData(path, formData) {
+    const res = await fetch(path, { method: "POST", body: formData });
     if (res.status === 401) throw { unauthorized: true };
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || "Bir hata oluştu");
@@ -222,11 +465,36 @@
     document.getElementById("login-error").textContent = message || "";
   }
 
+  function toast(message, type = "info", duration = 3000) {
+    const el = document.createElement("div");
+    el.className = `toast ${type}`;
+    const icons = { success: "✓", error: "✕", info: "ℹ" };
+    el.innerHTML = `<span class="toast-icon">${icons[type]}</span><span class="toast-message">${message}</span>`;
+    toastContainer.appendChild(el);
+    setTimeout(() => {
+      el.classList.add("removing");
+      el.addEventListener("animationend", () => el.remove());
+    }, duration);
+  }
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>]/g, (c) => ({ "&": "&", "<": "<", ">": ">" }[c]));
+  }
+  function escapeAttr(str) {
+    return escapeHtml(str).replace(/"/g, """);
+  }
+
+  function setButtonLoading(btn, loading) {
+    btn.classList.toggle("btn-loading", loading);
+    btn.disabled = loading;
+  }
+
   function render() {
     categoriesEl.innerHTML = "";
     menu.categories.forEach((cat, ci) => {
       const catEl = document.createElement("div");
       catEl.className = "category";
+      catEl.dataset.catIndex = ci;
 
       const head = document.createElement("div");
       head.className = "category-head";
@@ -247,9 +515,20 @@
       });
       catEl.appendChild(head);
 
+      const itemsList = document.createElement("div");
+      itemsList.className = "items-list";
+
       cat.items.forEach((item, ii) => {
-        catEl.appendChild(renderItem(item, cat, ii));
+        itemsList.appendChild(renderItem(item, cat, ii));
       });
+
+      // Drop zone for drag-and-drop reordering
+      const dropZone = document.createElement("div");
+      dropZone.className = "drop-zone";
+      dropZone.textContent = "Buraya bırakın";
+      itemsList.appendChild(dropZone);
+
+      catEl.appendChild(itemsList);
 
       const addItemBtn = document.createElement("button");
       addItemBtn.className = "btn-ghost add-item-btn";
@@ -262,11 +541,23 @@
 
       categoriesEl.appendChild(catEl);
     });
+
+    initDragAndDrop();
   }
 
   function renderItem(item, cat, ii) {
     const el = document.createElement("div");
     el.className = "item";
+    el.draggable = true;
+    el.dataset.itemIndex = ii;
+
+    const imagePreview = item.image
+      ? `<div class="image-preview-wrap">
+           <img src="${escapeAttr(item.image)}" alt="${escapeAttr(item.name)}" loading="lazy" />
+           <button type="button" class="remove-img" aria-label="Görseli kaldır" title="Görseli kaldır">×</button>
+         </div>`
+      : `<div class="image-preview-wrap"></div>`;
+
     el.innerHTML = `
       <div class="item-row">
         <div class="name">
@@ -277,36 +568,249 @@
           <small>Fiyat (₺)</small>
           <input class="i-price" type="number" min="0" step="1" value="${item.price ?? 0}" />
         </div>
+        <div class="image-preview">${imagePreview}</div>
       </div>
       <div>
         <small>Açıklama</small>
         <textarea class="i-desc">${escapeHtml(item.desc || "")}</textarea>
       </div>
       <div>
-        <small>Görsel yolu</small>
-        <input class="i-image" value="${escapeAttr(item.image || "")}" placeholder="/images/..." />
+        <small>Görsel</small>
+        <div class="image-upload" data-action="open-gallery" tabindex="0" role="button" aria-label="Görsel seç veya yükle">
+          <div class="upload-icon">🖼</div>
+          <p>${item.image ? "Görsel değiştir" : "Görsel ekle"}</p>
+          <p class="hint">Tıkla veya sürükle-bırak</p>
+          <input type="file" class="i-image-file" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" style="display:none;" />
+        </div>
+        <input type="hidden" class="i-image" value="${escapeAttr(item.image || "")}" />
       </div>
       <div class="item-actions">
+        <button class="btn-gold duplicate-item" title="Kopyala">📋 Kopyala</button>
         <button class="btn-danger del-item">Ürünü sil</button>
       </div>
     `;
+
     el.querySelector(".i-name").addEventListener("input", (e) => (item.name = e.target.value));
     el.querySelector(".i-price").addEventListener("input", (e) => (item.price = parseFloat(e.target.value) || 0));
     el.querySelector(".i-desc").addEventListener("input", (e) => (item.desc = e.target.value));
-    el.querySelector(".i-image").addEventListener("input", (e) => (item.image = e.target.value));
+
+    const imageInput = el.querySelector(".i-image");
+    const fileInput = el.querySelector(".i-image-file");
+    const uploadArea = el.querySelector('[data-action="open-gallery"]');
+    const removeBtn = el.querySelector(".remove-img");
+
+    // Open gallery on upload area click
+    uploadArea.addEventListener("click", (e) => {
+      if (e.target === fileInput) return;
+      openGallery(imageInput);
+    });
+    uploadArea.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openGallery(imageInput);
+      }
+    });
+
+    // Direct file upload via drag-drop or file picker
+    uploadArea.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      uploadArea.classList.add("drag-over");
+    });
+    uploadArea.addEventListener("dragleave", () => uploadArea.classList.remove("drag-over"));
+    uploadArea.addEventListener("drop", (e) => {
+      e.preventDefault();
+      uploadArea.classList.remove("drag-over");
+      const file = e.dataTransfer.files[0];
+      if (file) uploadImageDirect(file, imageInput, uploadArea);
+    });
+    fileInput.addEventListener("change", (e) => {
+      if (e.target.files[0]) uploadImageDirect(e.target.files[0], imageInput, uploadArea);
+      e.target.value = "";
+    });
+
+    // Remove image
+    removeBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      imageInput.value = "";
+      render();
+    });
+
+    // Duplicate item
+    el.querySelector(".duplicate-item").addEventListener("click", () => {
+      cat.items.splice(ii + 1, 0, { ...item, name: item.name + " (kopya)" });
+      render();
+    });
+
+    // Delete item
     el.querySelector(".del-item").addEventListener("click", () => {
       cat.items.splice(ii, 1);
       render();
     });
+
     return el;
   }
 
-  function escapeHtml(str) {
-    return String(str).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+  function openGallery(targetInput) {
+    pendingImageInput = targetInput;
+    gallerySelected = targetInput.value || null;
+    galleryModal.classList.add("open");
+    loadGalleryImages();
   }
-  function escapeAttr(str) {
-    return escapeHtml(str).replace(/"/g, "&quot;");
+
+  function closeGallery() {
+    galleryModal.classList.remove("open");
+    pendingImageInput = null;
+    gallerySelected = null;
+    gallerySelect.disabled = true;
   }
+
+  async function loadGalleryImages() {
+    galleryGrid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--cream-soft);padding:2rem;">Yükleniyor…</div>';
+    try {
+      const data = await api("/admin/api/images");
+      galleryImages = data.files || [];
+      renderGalleryGrid();
+    } catch (err) {
+      if (err.unauthorized) return showLogin("Oturum sona erdi");
+      galleryGrid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--red);padding:2rem;">Yüklenemedi</div>';
+      toast("Görseller yüklenemedi: " + err.message, "error");
+    }
+  }
+
+  function renderGalleryGrid() {
+    galleryGrid.innerHTML = "";
+    galleryImages.forEach((filename) => {
+      const item = document.createElement("div");
+      item.className = "image-grid-item";
+      item.dataset.filename = filename;
+      item.role = "option";
+      item.ariaSelected = gallerySelected === filename;
+      item.innerHTML = `
+        <img src="/images/${escapeAttr(filename)}" alt="${escapeAttr(filename)}" loading="lazy" />
+        <span class="checkmark">✓</span>
+      `;
+      if (gallerySelected === filename) item.classList.add("selected");
+      item.addEventListener("click", () => selectGalleryImage(filename, item));
+      galleryGrid.appendChild(item);
+    });
+    gallerySelect.disabled = !gallerySelected;
+  }
+
+  function selectGalleryImage(filename, el) {
+    galleryGrid.querySelectorAll(".image-grid-item").forEach((i) => i.classList.remove("selected"));
+    el.classList.add("selected");
+    gallerySelected = filename;
+    gallerySelect.disabled = false;
+  }
+
+  // Upload directly from item row (drag-drop or file picker)
+  async function uploadImageDirect(file, targetInput, uploadArea) {
+    if (file.size > 5 * 1024 * 1024) {
+      toast("Dosya çok büyük (max 5MB)", "error");
+      return;
+    }
+    const formData = new FormData();
+    formData.append("file", file);
+    uploadArea.classList.add("drag-over"); // reuse as loading state
+    const originalHtml = uploadArea.innerHTML;
+    uploadArea.innerHTML = '<div class="upload-icon">⟳</div><p>Yükleniyor…</p>';
+    try {
+      const data = await apiFormData("/admin/api/images", formData);
+      if (data.ok && data.url) {
+        targetInput.value = data.url;
+        toast("Görsel yüklendi", "success");
+        // Update the preview in the item row
+        const itemEl = uploadArea.closest(".item");
+        if (itemEl) {
+          const previewWrap = itemEl.querySelector(".image-preview-wrap");
+          previewWrap.innerHTML = `
+            <img src="${escapeAttr(data.url)}" alt="" loading="lazy" />
+            <button type="button" class="remove-img" aria-label="Görseli kaldır" title="Görseli kaldır">×</button>
+          `;
+          previewWrap.querySelector(".remove-img").addEventListener("click", (e) => {
+            e.stopPropagation();
+            targetInput.value = "";
+            render();
+          });
+        }
+      }
+    } catch (err) {
+      if (err.unauthorized) return showLogin("Oturum sona erdi");
+      toast("Yükleme başarısız: " + err.message, "error");
+    } finally {
+      uploadArea.innerHTML = originalHtml;
+      uploadArea.classList.remove("drag-over");
+    }
+  }
+
+  // Gallery upload
+  galleryFileInput.addEventListener("change", async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      toast("Dosya çok büyük (max 5MB)", "error");
+      e.target.value = "";
+      return;
+    }
+    const formData = new FormData();
+    formData.append("file", file);
+    const uploadBtn = galleryUpload.querySelector("p");
+    const originalText = uploadBtn.textContent;
+    uploadBtn.textContent = "Yükleniyor…";
+    galleryUpload.classList.add("drag-over");
+    try {
+      const data = await apiFormData("/admin/api/images", formData);
+      if (data.ok && data.filename) {
+        galleryImages.unshift(data.filename);
+        renderGalleryGrid();
+        selectGalleryImage(data.filename, galleryGrid.querySelector(`[data-filename="${data.filename}"]`));
+        toast("Görsel yüklendi", "success");
+      }
+    } catch (err) {
+      if (err.unauthorized) return showLogin("Oturum sona erdi");
+      toast("Yükleme başarısız: " + err.message, "error");
+    } finally {
+      uploadBtn.textContent = originalText;
+      galleryUpload.classList.remove("drag-over");
+      e.target.value = "";
+    }
+  });
+
+  // Drag-drop on gallery upload area
+  galleryUpload.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    galleryUpload.classList.add("drag-over");
+  });
+  galleryUpload.addEventListener("dragleave", () => galleryUpload.classList.remove("drag-over"));
+  galleryUpload.addEventListener("drop", (e) => {
+    e.preventDefault();
+    galleryUpload.classList.remove("drag-over");
+    const file = e.dataTransfer.files[0];
+    if (file) galleryFileInput.dispatchEvent(new Event("change", { bubbles: true }));
+    // Note: we can't easily set files on input via drag-drop, so just trigger click
+    if (file) galleryFileInput.click();
+  });
+  galleryUpload.addEventListener("click", () => galleryFileInput.click());
+  galleryUpload.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      galleryFileInput.click();
+    }
+  });
+
+  galleryClose.addEventListener("click", closeGallery);
+  galleryCancel.addEventListener("click", closeGallery);
+  galleryModal.addEventListener("click", (e) => {
+    if (e.target === galleryModal) closeGallery();
+  });
+  gallerySelect.addEventListener("click", () => {
+    if (gallerySelected && pendingImageInput) {
+      pendingImageInput.value = `/images/${gallerySelected}`;
+      closeGallery();
+      render(); // re-render to show preview
+      toast("Görsel seçildi", "success");
+    }
+  });
 
   document.getElementById("add-category-btn").addEventListener("click", () => {
     menu.categories.push({ name: "", note: "", items: [] });
@@ -314,16 +818,22 @@
   });
 
   document.getElementById("save-btn").addEventListener("click", async () => {
+    const btn = document.getElementById("save-btn");
+    setButtonLoading(btn, true);
     saveStatus.className = "";
     saveStatus.textContent = "Kaydediliyor…";
     try {
       await api("/admin/api/menu", { method: "PUT", body: JSON.stringify(menu) });
       saveStatus.className = "ok";
       saveStatus.textContent = "Kaydedildi ✓";
+      toast("Menü kaydedildi", "success");
     } catch (err) {
       if (err.unauthorized) return showLogin("Oturum sona erdi, tekrar giriş yap.");
       saveStatus.className = "err";
       saveStatus.textContent = err.message || "Kaydedilemedi";
+      toast("Kayıt başarısız: " + err.message, "error");
+    } finally {
+      setButtonLoading(btn, false);
     }
   });
 
@@ -332,11 +842,24 @@
     showLogin();
   });
 
+  document.getElementById("refresh-btn").addEventListener("click", async () => {
+    const btn = document.getElementById("refresh-btn");
+    setButtonLoading(btn, true);
+    try {
+      await loadMenu();
+      toast("Menü yenilendi", "success");
+    } finally {
+      setButtonLoading(btn, false);
+    }
+  });
+
+  document.getElementById("gallery-btn").addEventListener("click", () => openGallery(null));
+
   document.getElementById("login-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const password = document.getElementById("password").value;
     const btn = e.target.querySelector("button");
-    btn.disabled = true;
+    setButtonLoading(btn, true);
     try {
       await api("/admin/api/login", { method: "POST", body: JSON.stringify({ password }) });
       document.getElementById("password").value = "";
@@ -344,7 +867,7 @@
     } catch (err) {
       document.getElementById("login-error").textContent = err.message || "Giriş başarısız";
     } finally {
-      btn.disabled = false;
+      setButtonLoading(btn, false);
     }
   });
 
@@ -357,6 +880,60 @@
       if (err.unauthorized) return showLogin();
       showLogin(err.message || "Menü yüklenemedi");
     }
+  }
+
+  // Drag and drop for item reordering
+  function initDragAndDrop() {
+    let draggedItem = null;
+    let draggedCatIndex = null;
+    let draggedItemIndex = null;
+
+    document.querySelectorAll(".item").forEach((itemEl) => {
+      itemEl.addEventListener("dragstart", (e) => {
+        draggedItem = itemEl;
+        draggedCatIndex = parseInt(itemEl.closest(".category").dataset.catIndex, 10);
+        draggedItemIndex = parseInt(itemEl.dataset.itemIndex, 10);
+        itemEl.classList.add("dragging");
+        e.dataTransfer.effectAllowed = "move";
+      });
+      itemEl.addEventListener("dragend", () => {
+        itemEl.classList.remove("dragging");
+        draggedItem = null;
+        document.querySelectorAll(".drop-zone").forEach((dz) => dz.classList.remove("active"));
+      });
+      itemEl.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "move";
+      });
+      itemEl.addEventListener("drop", (e) => {
+        e.preventDefault();
+        if (!draggedItem || draggedItem === itemEl) return;
+        const targetCatIndex = parseInt(itemEl.closest(".category").dataset.catIndex, 10);
+        const targetItemIndex = parseInt(itemEl.dataset.itemIndex, 10);
+
+        const [moved] = menu.categories[draggedCatIndex].items.splice(draggedItemIndex, 1);
+        menu.categories[targetCatIndex].items.splice(targetItemIndex, 0, moved);
+        render();
+      });
+    });
+
+    document.querySelectorAll(".drop-zone").forEach((dz) => {
+      dz.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dz.classList.add("active");
+        e.dataTransfer.dropEffect = "move";
+      });
+      dz.addEventListener("dragleave", () => dz.classList.remove("active"));
+      dz.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dz.classList.remove("active");
+        if (!draggedItem) return;
+        const targetCatIndex = parseInt(dz.closest(".category").dataset.catIndex, 10);
+        const [moved] = menu.categories[draggedCatIndex].items.splice(draggedItemIndex, 1);
+        menu.categories[targetCatIndex].items.push(moved);
+        render();
+      });
+    });
   }
 
   loadMenu();
